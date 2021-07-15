@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:19:23 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/14 10:24:01 by dperez-z         ###   ########.fr       */
+/*   Updated: 2021/07/06 08:10:07 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,4 @@ char	*ft_strjoin(char *s1, char *s2)
 		*(dest + i++) = *(s2 + j);
 	dest[i++] = '\0';
 	return (dest);
-}
-
-// Malloc 1 dim
-char	*ft_malloc1(int i)
-{
-	char	*s;
-
-	s = ft_calloc(i + 1, 1);
-	if (!s)
-		s = NULL;
-	return (s);
 }

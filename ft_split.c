@@ -6,7 +6,7 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 23:10:36 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/06 08:20:30 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/15 10:27:48 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,26 @@ static int	ft_word_len(char const *str, char c)
 	return (len);
 }
 
+//Malloc funcion 2dimentions
+char	**ft_malloc2(const char *str, int cont)
+{
+	char	**s;
+	
+	s = (char **)malloc(sizeof(*s) * cont);
+	if (!str || !s)
+		return (NULL);
+	return (s);
+}
+
+//Malloc funcion 1dimentions
+char	*ft_malloc1(int cont)
+{
+	char *s;
+	s = ft_calloc(cont, 1);
+	if (!s)
+		s = NULL;
+	return (s);
+}
 //Split funcion
 char	**ft_split(const char *str, char c)
 {
@@ -85,17 +105,13 @@ char	**ft_split(const char *str, char c)
 	int		k;
 	char	**s;
 
-	s = (char **)malloc(sizeof(*s) * (ft_contador(str, c) + 1));
-	if (!str || !s)
-		return (NULL);
+	s = ft_malloc2(str, (ft_contador(str, c) + 1));
 	i = -1;
 	j = 0;
 	while (++i < ft_contador(str, c))
 	{
 		k = 0;
-		s[i] = ft_calloc(ft_word_len(&str[j], c) + 1, 1);
-		if (!s[i])
-			s[i] = NULL;
+		s[i] = ft_malloc1(ft_word_len(&str[j], c) + 1);
 		while (str[j] == c)
 			j++;
 		while (str[j] != c && str[j])

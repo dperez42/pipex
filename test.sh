@@ -17,33 +17,26 @@ comp() {
 }
 
 init () {
-	echo -n "" > test2
-	echo -n "" > user2
+	echo -n "" > machine
+	echo -n "" > user
 }
 initfiles () {
-	echo -n "hello
+	echo "infile:"
+	echo "
+	hello
 	hello world
 	hell
-	" > test1
+	" > test1 
 
-	echo -n "hello
-	hello world
-	hell
-	" > user1
+	cat test1
 
-	echo -n "a1
+	echo "infile2:"
+	echo "a1
 	hello world
 	a1
 	b1
 	a1
-	" > testA1
-
-	echo -n "a1
-	hello world
-	a1
-	b1
-	a1
-	" > userA1
+	" > test2
 }
 
 printf "$YELLOW$S1\n\n"
@@ -59,64 +52,79 @@ printf "$BLUE"; make -C ./ all; printf "$RESET"
 initfiles
 
 printf "$YELLOW$S1$RESET\n"
-printf "$PURPLE""test: < infile grep a1 | wc -w > outfile$RESET\n"
+printf "$PURPLE""test: < infile2 grep a1 | wc -w > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
-< testA1 grep a1 | wc -w > test2 2> test2
-./pipex userA1 "grep a1" "wc -w" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
+< test2 grep a1 | wc -w > machine 2> machine
+./pipex test2 "grep a1" "wc -w" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
 
 printf "$YELLOW$S1$RESET\n"
 printf "$PURPLE""test: < infile grep hello | wc -w > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
-< test1 grep hello | wc -w > test2 2> test2
-./pipex user1 "grep hello" "wc -w" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
+< test1 grep hello | wc -w > machine 2> machine
+./pipex test1 "grep hello" "wc -w" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
 
 printf "$YELLOW$S1$RESET\n"
-printf "$PURPLE""test: < infile ls -l | wc -l > outfile$RESET\n"
+printf "$PURPLE""test: < infile2 ls -l | wc -l > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
-< testA1 ls -l | wc -l > test2 2> test2
-./pipex userA1 "ls -l" "wc -l" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
+< test2 ls -l | wc -l > machine 2> machine
+./pipex test2 "ls -l" "wc -l" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
+
+printf "$YELLOW$S1$RESET\n"
+printf "$PURPLE""test: < infile2 ls | grep pipex > outfile$RESET\n"
+printf "$PURPLE$S2$RESET\n"
+init
+< test2 ls | grep pipex > machine 2> machine
+./pipex user2 "ls" "grep pipex" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
 
 printf "$YELLOW$S1$RESET\n"
 printf "$PURPLE""test: < infile grep hello | awk '{count++} END {print count}' > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
-< test1 grep hello | awk '{count++} END {
-	print count}' > test2 2> test2
-./pipex user1 "grep hello" "awk \'{count++} END {print count}\'" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
+< test1 grep hello | awk '{count++} END {print count}' > machine 2> machine
+./pipex test1 "grep hello" "awk '{count++} END {print count}'" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
 
 printf "$YELLOW$S1$RESET\n"
 printf "$PURPLE""test: < infile grep hello | awk \"{count++} END {print count}\" > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
-< test1 grep hello | awk "{count++} END {print count}" > test2 2> test2
-./pipex user1 "grep hello" "awk \"{count++} END {print count}\"" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
+< test1 grep hello | awk "{count++} END {print count}" > machine 2> machine
+./pipex test1 "grep hello" "awk \"{count++} END {print count}\"" user 2> user
+comp machine user
+echo "Bash:"
+cat machine
+echo "User:"
+cat user
+rm -rf machine user
 
-printf "$YELLOW$S1$RESET\n"
-printf "$PURPLE""test: < infile grep hello | awk '\"{count++} END {print count}\"' > outfile$RESET\n"
-printf "$PURPLE$S2$RESET\n"
-< test1 grep hello | awk '"{count++} END {print count}"' > test2 2> test2
-./pipex user1 "grep hello" "awk '\"{count++} END {print count}\"'" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
-
-printf "$YELLOW$S1$RESET\n"
-printf "$PURPLE""test: < infile grep hello | awk \"'{count++} END {print count}'\" > outfile$RESET\n"
-printf "$PURPLE$S2$RESET\n"
-< test1 grep hello | awk "'{count++} END {print count}'" > test2 2> test2
-./pipex user1 "grep hello" "awk \"'{count++} END {print count}'\"" user2 2> user2
-comp test2 user2
-rm -rf test2 user2
-
-rm -rf test1 user1
-rm -rf testA1 userA1
+rm -rf test1 test2

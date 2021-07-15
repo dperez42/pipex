@@ -6,7 +6,7 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:41:44 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/06 08:22:13 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/15 10:20:54 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int	ft_exe(char *command, char **param, char **env)
 	{
 		tmp = ft_strjoin_path(g_pipex.paths[i], command);
 		execve(tmp, param, env);
+
+		//printf(" esto es la cadena %s \n", &param);
+
 		free(tmp);
 		i++;
 	}
