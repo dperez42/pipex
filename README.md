@@ -24,6 +24,7 @@ $> ./pipex infile "grep a1" "wc -w" outfile
 should be the same as “< infile grep a1 | wc -w > outfile”
 
 # TEST:
+In the same path of pipex executable
 
 sh ./test.sh
 
