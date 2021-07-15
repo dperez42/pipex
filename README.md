@@ -56,6 +56,3 @@ if (g_pipex.fileout)
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
-- 
-
-
