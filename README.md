@@ -40,7 +40,8 @@ Because a pipe in only in one direction comunication, we have to close OUT fd[1]
 In each process we try to open infile and outfile with open funtion.
 - father: only read permissions.open(g_pipex.filein, O_RDONLY).
 - child: a lot of permissions. open(g_pipex.fileout, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU | S_IRGRP | S_IROTH);
-if error opening or not exist file EXIT.
+
+if opening error or not exist file EXIT.
 
 In father process:
 dup2(file, STDIN_FILENO);
