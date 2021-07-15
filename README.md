@@ -1,7 +1,8 @@
-# pipex
+# PIPEX
 
 Objectives
 Your objective is to code the Pipex program.
+
 It should be executed in this way:
 $> ./pipex file1 cmd1 cmd2 file2
 
@@ -14,14 +15,16 @@ $> < file1 cmd1 | cmd2 > file2
 
 III.1 Examples
 
-$> ./pipex infile ``ls -l'' ``wc -l'' outfile
+$> ./pipex infile "ls -l" "wc -l" outfile
 
 should be the same as “< infile ls -l | wc -l > outfile”
 
-$> ./pipex infile ``grep a1'' ``wc -w'' outfile
+$> ./pipex infile "grep a1" "wc -w" outfile
 
 should be the same as “< infile grep a1 | wc -w > outfile”
 
 # TEST:
 
 sh ./test.sh
+
+# EXPLANATION:
