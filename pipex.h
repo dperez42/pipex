@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:37:07 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/06 08:09:47 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/17 11:04:21 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_commands
 	char	**param_in;
 	char	*command_out;
 	char	**param_out;
+	int		flag;
 }	t_commands;
 
 t_commands	g_pipex;
@@ -42,4 +43,7 @@ void	ft_exit(int ex, char *str);
 int		ft_pip(char **env);
 void	ft_parse(char **argv, char **env);
 void	*ft_calloc(size_t nitems, size_t size);
+void	ft_bzero(void *str, size_t n);
+char	**ft_malloc2(const char *str, int cont);
+char	*ft_malloc1(int cont);
 #endif

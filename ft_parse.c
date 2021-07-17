@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 22:58:31 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/15 10:29:33 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/17 11:10:12 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_bzero(void *str, size_t n)
+{
+	char	*c;
+	size_t	i;
+
+	c = (char *)str;
+	i = 0;
+	while (i < n)
+	{
+		*c = '\0';
+		c++;
+		i++;
+	}
+}
 
 char	*ft_strdup(const char *s1)
 {
@@ -87,7 +102,9 @@ void	ft_parse(char **argv, char **env)
 			ft_exit(-1, ": \033[1;31mEmpty command \n\033[0m");
 	g_pipex.filein = ft_strdup(argv[1]);
 	g_pipex.fileout = ft_strdup(argv[4]);
+	g_pipex.flag = 0;
 	g_pipex.param_in = ft_split_param(argv[2], ' ');
+	g_pipex.flag = 0;
 	g_pipex.param_out = ft_split_param(argv[3], ' ');
 	tmp = ft_split(argv[2], ' ');
 	g_pipex.command_in = ft_strdup(tmp[0]);
@@ -96,26 +113,5 @@ void	ft_parse(char **argv, char **env)
 	g_pipex.command_out = ft_strdup(tmp[0]);
 	ft_free_array(tmp);
 	ft_load_paths(env);
-	/*
-	i = 0;
-	int j;
-	j = 0;
-	printf(" command 1: %s \n", g_pipex.command_in);
-	while (g_pipex.param_in[i])
-	{	
-		printf(" Cadena de parametros: %s .", g_pipex.param_in[i]);
-		i ++;
-	}
-	printf("\n");
-	i = 0;
-	printf(" command 2: %s \n", g_pipex.command_out);
-	while (g_pipex.param_in[i])
-	{	
-		printf(" Cadena de parametros: %s .", g_pipex.param_out[i]);
-		i ++;
-	}
-	printf("\n");
-	exit (0);
-	*/
 	return ;
 }

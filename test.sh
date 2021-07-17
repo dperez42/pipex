@@ -26,17 +26,19 @@ initfiles () {
 	hello
 	hello world
 	hell
+	hello
 	" > test1 
-
 	cat test1
 
 	echo "infile2:"
-	echo "a1
+	echo "
+	a1
 	hello world
 	a1
 	b1
 	a1
 	" > test2
+	cat test2
 }
 
 printf "$YELLOW$S1\n\n"
@@ -48,6 +50,12 @@ echo "██║     ██║██║     ███████╗██╔╝ 
 echo "╚═╝     ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚══════╝╚═════╝ ╚═╝ ╚═════╝"
 printf "\n$S1$RESET\n"
 printf "$BLUE"; make -C ./ all; printf "$RESET"
+norminette | grep Error! | wc -l
+if [ "$(norminette | grep Error! | wc -l)" != "       0" ]; then
+	printf "$RED Norminette: Errors in Norminette.$RESET \n"
+else
+	printf "$GREEN Norminette: OK.$RESET \n"
+fi
 
 initfiles
 
@@ -95,7 +103,7 @@ printf "$PURPLE""test: < infile2 ls | grep pipex > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
 < test2 ls | grep pipex > machine 2> machine
-./pipex user2 "ls" "grep pipex" user 2> user
+./pipex test2 "ls" "grep pipex" user 2> user
 comp machine user
 echo "Bash:"
 cat machine

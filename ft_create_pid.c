@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_pid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:41:44 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/15 10:20:54 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/17 10:34:27 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ int	ft_exe(char *command, char **param, char **env)
 	{
 		tmp = ft_strjoin_path(g_pipex.paths[i], command);
 		execve(tmp, param, env);
-
-		//printf(" esto es la cadena %s \n", &param);
-
 		free(tmp);
 		i++;
 	}

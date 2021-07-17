@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 20:19:23 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/06 08:10:07 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/17 10:37:21 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,15 @@ char	*ft_strjoin(char *s1, char *s2)
 		*(dest + i++) = *(s2 + j);
 	dest[i++] = '\0';
 	return (dest);
+}
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	char	*res;
+
+	res = malloc(nitems * size);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, nitems * size);
+	return ((void *)res);
 }

@@ -3,40 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 23:10:36 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/15 10:27:48 by daniel           ###   ########.fr       */
+/*   Updated: 2021/07/17 10:39:16 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ft_bzero(void *str, size_t n)
-{
-	char	*c;
-	size_t	i;
-
-	c = (char *)str;
-	i = 0;
-	while (i < n)
-	{
-		*c = '\0';
-		c++;
-		i++;
-	}
-}
-
-void	*ft_calloc(size_t nitems, size_t size)
-{
-	char	*res;
-
-	res = malloc(nitems * size);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, nitems * size);
-	return ((void *)res);
-}
 
 //Aux Split funcion
 static int	ft_contador(char const *str, char c)
@@ -81,7 +55,7 @@ static int	ft_word_len(char const *str, char c)
 char	**ft_malloc2(const char *str, int cont)
 {
 	char	**s;
-	
+
 	s = (char **)malloc(sizeof(*s) * cont);
 	if (!str || !s)
 		return (NULL);
@@ -91,12 +65,14 @@ char	**ft_malloc2(const char *str, int cont)
 //Malloc funcion 1dimentions
 char	*ft_malloc1(int cont)
 {
-	char *s;
+	char	*s;
+
 	s = ft_calloc(cont, 1);
 	if (!s)
 		s = NULL;
 	return (s);
 }
+
 //Split funcion
 char	**ft_split(const char *str, char c)
 {
