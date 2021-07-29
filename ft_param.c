@@ -6,7 +6,7 @@
 /*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 23:10:36 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/17 11:45:45 by dperez-z         ###   ########.fr       */
+/*   Updated: 2021/07/29 08:50:24 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ static int	ft_word_len_param(char const *str, char c)
 	return (len);
 }
 
-int	ft_flag(int flag)
+int	ft_flag(int flag, t_commands *pipex)
 {
 	if (flag == 0)
-		g_pipex.flag = 1;
+		pipex->flag = 1;
 	else
-		g_pipex.flag = 0;
+		pipex->flag = 0;
 	return (1);
 }
 
@@ -89,7 +89,7 @@ int	ft_avant(const char *str, int ini, char c)
 }
 
 // modified ft_split for " and '
-char	**ft_split_param(const char *str, char c)
+char	**ft_split_param(const char *str, char c, t_commands *pipex)
 {
 	int		i;
 	int		j;
@@ -107,8 +107,8 @@ char	**ft_split_param(const char *str, char c)
 		while (str[j])
 		{
 			if (str[j] == '\'' || str[j] == '\"')
-				j = j + ft_flag(g_pipex.flag);
-			if (str[j] == c && g_pipex.flag == 0)
+				j = j + ft_flag(pipex->flag, pipex);
+			if (str[j] == c && pipex->flag == 0)
 				break ;
 			s[i][k++] = str[j++];
 		}

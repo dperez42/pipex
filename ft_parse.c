@@ -6,7 +6,7 @@
 /*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 22:58:31 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/17 11:10:12 by dperez-z         ###   ########.fr       */
+/*   Updated: 2021/07/29 09:11:41 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 }
 
 //Load enviroment paths in g_pipex.paths
-void	ft_load_paths(char **env)
+void	ft_load_paths(char **env, t_commands *pipex)
 {
 	int		i;
 	char	**tmp;
@@ -80,7 +80,7 @@ void	ft_load_paths(char **env)
 		tmp = ft_split(env[i], '=');
 		if (!ft_strcmp(tmp[0], "PATH"))
 		{
-			g_pipex.paths = ft_split(tmp[1], ':');
+			pipex->paths = ft_split(tmp[1], ':');
 			ft_free_array(tmp);
 			return ;
 		}
@@ -91,7 +91,7 @@ void	ft_load_paths(char **env)
 }
 
 //Parsing data to g_pipex
-void	ft_parse(char **argv, char **env)
+void	ft_parse(char **argv, char **env, t_commands *pipex)
 {
 	char	**tmp;
 	int		i;
@@ -99,19 +99,19 @@ void	ft_parse(char **argv, char **env)
 	i = 0;
 	while (argv[i])
 		if (!ft_strcmp(argv[i++], ""))
-			ft_exit(-1, ": \033[1;31mEmpty command \n\033[0m");
-	g_pipex.filein = ft_strdup(argv[1]);
-	g_pipex.fileout = ft_strdup(argv[4]);
-	g_pipex.flag = 0;
-	g_pipex.param_in = ft_split_param(argv[2], ' ');
-	g_pipex.flag = 0;
-	g_pipex.param_out = ft_split_param(argv[3], ' ');
+			ft_exit(-1, ": \033[1;31mEmpty command \n\033[0m", pipex);
+	pipex->filein = ft_strdup(argv[1]);
+	pipex->fileout = ft_strdup(argv[4]);
+	pipex->flag = 0;
+	pipex->param_in = ft_split_param(argv[2], ' ', pipex);
+	pipex->flag = 0;
+	pipex->param_out = ft_split_param(argv[3], ' ', pipex);
 	tmp = ft_split(argv[2], ' ');
-	g_pipex.command_in = ft_strdup(tmp[0]);
+	pipex->command_in = ft_strdup(tmp[0]);
 	ft_free_array(tmp);
 	tmp = ft_split(argv[3], ' ');
-	g_pipex.command_out = ft_strdup(tmp[0]);
+	pipex->command_out = ft_strdup(tmp[0]);
 	ft_free_array(tmp);
-	ft_load_paths(env);
+	ft_load_paths(env, pipex);
 	return ;
 }
