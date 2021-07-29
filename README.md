@@ -30,9 +30,11 @@ sh ./test.sh
 
 # EXPLANATION:
 
-I used a global variable to save all the parameters, g_pipex.
+I used a variable to save all the parameters, pipex.
 - in g_pipex.paths, save paths from the enviroment
 ...
+
+In the parsing phase, extract name of file, list of paths from enviroment, commands and parameters.
 
 The ft_pip funtion create a pipe with a file descriptor with -> "pipe(fd)"  then create a child process with fork. The pipe is for comunicate father and child process.
 Because a pipe in only in one direction comunication, we have to close OUT fd[1] in child process and IN fd[0] in father process.
@@ -43,15 +45,18 @@ In each process we try to open infile and outfile with open funtion.
 
 if opening error or not exist file EXIT.
 
-In father process:
+In father process: redirect de file to the standard input and the pipe to the the standard output.
+
 dup2(file, STDIN_FILENO);
 close(file);
+
 dup2(pipefd, STDOUT_FILENO);
 close(pipefd);
 
-In child process:
+In child process: the pipe to the the standard input. the standard output to the file
 dup2(pipefd, STDIN_FILENO);
 close(pipefd);
+
 if (g_pipex.fileout)
 {
 	dup2(fd, STDOUT_FILENO);
