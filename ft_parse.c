@@ -6,7 +6,7 @@
 /*   By: dperez-z <dperez-z@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 22:58:31 by daniel            #+#    #+#             */
-/*   Updated: 2021/07/29 09:11:41 by dperez-z         ###   ########.fr       */
+/*   Updated: 2021/08/19 11:04:42 by dperez-z         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_parse(char **argv, char **env, t_commands *pipex)
 	i = 0;
 	while (argv[i])
 		if (!ft_strcmp(argv[i++], ""))
-			ft_exit(-1, ": \033[1;31mEmpty command \n\033[0m", pipex);
+			ft_exit(-2, ": \033[1;31mEmpty command \n\033[0m", pipex);
 	pipex->filein = ft_strdup(argv[1]);
 	pipex->fileout = ft_strdup(argv[4]);
 	pipex->flag = 0;

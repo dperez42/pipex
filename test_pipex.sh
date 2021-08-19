@@ -77,7 +77,7 @@ printf "$PURPLE""test: < infile grep hello | wc -w > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
 < test1 grep hello | wc -w > machine 2> machine
-./pipex test1 "grep hello" "wc -w" user 2> user
+./pipex test1 "grep hello" "wc -w" user 
 comp machine user
 echo "Bash:"
 cat machine
@@ -90,7 +90,7 @@ printf "$PURPLE""test: < infile2 ls -l | wc -l > outfile$RESET\n"
 printf "$PURPLE$S2$RESET\n"
 init
 < test2 ls -l | wc -l > machine 2> machine
-./pipex test2 "ls -l" "wc -l" user 2> user
+./pipex test2 "ls -l" "wc -l" user 
 comp machine user
 echo "Bash:"
 cat machine
